@@ -33,7 +33,16 @@ public class Game {
         this.moves.add(move);
         move.getCell().setSymbol(move.getSymbol());
 
-
+        for(GameWinningStrategy gameWinningStrategy : this.winningStrategies){
+            if(gameWinningStrategy.checkIfWinning(board, this.player.get(lastMovedPlayerIndex), move.getCell())){
+                gameStatus = GameStatus.ENDED;
+                winner = this.player.get(lastMovedPlayerIndex);
+                return;
+            }
+        }
+        if(moves.size() == board.getDimension() * board.getDimension()){
+            gameStatus = GameStatus.DRAW;
+        }
     }
 
     public List<Player> getPlayer() {
