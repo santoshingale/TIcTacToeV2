@@ -7,12 +7,12 @@ import com.santosh.tictactoe.model.Player;
 
 import java.util.List;
 
-public class RandomBotMove implements BotPlayingStrategy{
+public class RandomBotMove implements BotPlayingStrategy {
     @Override
     public Move makeNextMove(Board board, Player player) {
-        for(List<Cell> row: board.getBoard()){
-            for(Cell cell : row){
-                if(cell.isEmpty()){
+        for (List<Cell> row : board.getBoard()) {
+            for (Cell cell : row) {
+                if (cell.isEmpty()) {
                     Move move = new Move();
                     move.setPlayer(player);
                     move.setSymbol(player.getSymbol());

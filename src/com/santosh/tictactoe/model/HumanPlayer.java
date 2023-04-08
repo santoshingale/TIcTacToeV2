@@ -2,7 +2,7 @@ package com.santosh.tictactoe.model;
 
 import java.util.Scanner;
 
-public class HumanPlayer extends Player{
+public class HumanPlayer extends Player {
 
     public HumanPlayer(Symbol symbol) {
         super(symbol, PlayerType.HUMAN);

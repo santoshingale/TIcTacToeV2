@@ -6,7 +6,7 @@ import com.santosh.tictactoe.model.strategy.botplaying.RandomBotMove;
 public class BotPlayingStrategyFactory {
     public static BotPlayingStrategy createBotPlayingStrategyForDifficultyLevel(BotDifficultyLevel botDifficultyLevel) {
 
-        return switch (botDifficultyLevel){
+        return switch (botDifficultyLevel) {
             case EASY, MEDIUM, HARD -> new RandomBotMove();
         };
 //        return null;

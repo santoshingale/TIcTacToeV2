@@ -1,4 +1,4 @@
-package com.santosh.tictactoe.model.strategy;
+package com.santosh.tictactoe.model.strategy.gamewinningstrategy;
 
 import com.santosh.tictactoe.model.Board;
 import com.santosh.tictactoe.model.Cell;

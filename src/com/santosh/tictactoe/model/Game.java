@@ -1,6 +1,6 @@
 package com.santosh.tictactoe.model;
 
-import com.santosh.tictactoe.model.strategy.GameWinningStrategy;
+import com.santosh.tictactoe.model.strategy.gamewinningstrategy.GameWinningStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +22,17 @@ public class Game {
         this.gameStatus = GameStatus.IN_PROGRESS;
     }
 
-    public void makeMove(){
+    public static Builder create() {
+        return new Builder();
+    }
+
+    public void makeMove() {
         this.lastMovedPlayerIndex += 1;
         this.lastMovedPlayerIndex %= this.player.size();
         Move move = this.player.get(this.lastMovedPlayerIndex).makeMove(this.board);
         this.moves.add(move);
         move.getCell().setSymbol(move.getSymbol());
+
 
     }
 
@@ -55,10 +60,6 @@ public class Game {
         return winner;
     }
 
-    public static Builder create(){
-        return new Builder();
-    }
-
     private static class Builder {
         private List<Player> player;
         private int dimension;
@@ -69,27 +70,27 @@ public class Game {
             winningStrategies = new ArrayList<>();
         }
 
-        public Builder addPlayer(Player player){
+        public Builder addPlayer(Player player) {
             this.player.add(player);
             return this;
         }
 
-        public Builder addPlayers(List<Player> players){
+        public Builder addPlayers(List<Player> players) {
             this.player.addAll(player);
             return this;
         }
 
-        public Builder addWinningStrategy(GameWinningStrategy gameWinningStrategy){
+        public Builder addWinningStrategy(GameWinningStrategy gameWinningStrategy) {
             winningStrategies.add(gameWinningStrategy);
             return this;
         }
 
-        public Builder addDimension(int dimension){
+        public Builder addDimension(int dimension) {
             this.dimension = dimension;
             return this;
         }
 
-        public Game build(){
+        public Game build() {
             Game game = new Game();
             game.board = new Board(dimension);
             game.winningStrategies.addAll(this.winningStrategies);
