@@ -16,4 +16,12 @@ public class Board {
             }
         }
     }
+
+    public Cell getCell(int row, int col) {
+        return board.get(row).get(col);
+    }
+
+    public List<List<Cell>> getBoard() {
+        return board;
+    }
 }
