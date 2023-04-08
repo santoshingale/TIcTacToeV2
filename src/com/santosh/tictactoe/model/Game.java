@@ -11,7 +11,25 @@ public class Game {
     private List<Move> moves;
     private List<GameWinningStrategy> winningStrategies;
     private GameStatus gameStatus;
+    private int lastMovedPlayerIndex;
     private Player winner;
+
+    private Game() {
+        this.player = new ArrayList<>();
+        this.moves = new ArrayList<>();
+        this.winningStrategies = new ArrayList<>();
+        this.lastMovedPlayerIndex = -1;
+        this.gameStatus = GameStatus.IN_PROGRESS;
+    }
+
+    public void makeMove(){
+        this.lastMovedPlayerIndex += 1;
+        this.lastMovedPlayerIndex %= this.player.size();
+        Move move = this.player.get(this.lastMovedPlayerIndex).makeMove(this.board);
+        this.moves.add(move);
+        move.getCell().setSymbol(move.getSymbol());
+
+    }
 
     public List<Player> getPlayer() {
         return player;
