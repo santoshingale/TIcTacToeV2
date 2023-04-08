@@ -26,7 +26,7 @@ public class Game {
         return new Builder();
     }
 
-    public void makeMove() {
+    public void makeMove(){
         this.lastMovedPlayerIndex += 1;
         this.lastMovedPlayerIndex %= this.player.size();
         Move move = this.player.get(this.lastMovedPlayerIndex).makeMove(this.board);
@@ -34,11 +34,11 @@ public class Game {
         move.getCell().setSymbol(move.getSymbol());
 
         for(GameWinningStrategy gameWinningStrategy : this.winningStrategies){
-            if(gameWinningStrategy.checkIfWinning(board, this.player.get(lastMovedPlayerIndex), move.getCell())){
-                gameStatus = GameStatus.ENDED;
-                winner = this.player.get(lastMovedPlayerIndex);
-                return;
-            }
+//            if(gameWinningStrategy.checkIfWinning(board, this.player.get(lastMovedPlayerIndex), move.getCell())){
+//                gameStatus = GameStatus.ENDED;
+//                winner = this.player.get(lastMovedPlayerIndex);
+//                return;
+//            }
         }
         if(moves.size() == board.getDimension() * board.getDimension()){
             gameStatus = GameStatus.DRAW;
@@ -69,7 +69,11 @@ public class Game {
         return winner;
     }
 
-    private static class Builder {
+    public boolean undo() {
+        return false;
+    }
+
+    public static class Builder {
         private List<Player> player;
         private int dimension;
         private List<GameWinningStrategy> winningStrategies;
@@ -85,12 +89,17 @@ public class Game {
         }
 
         public Builder addPlayers(List<Player> players) {
-            this.player.addAll(player);
+            this.player.addAll(players);
+
             return this;
         }
 
         public Builder addWinningStrategy(GameWinningStrategy gameWinningStrategy) {
             winningStrategies.add(gameWinningStrategy);
+            return this;
+        }
+        public Builder addWinningStrategies(List<GameWinningStrategy> gameWinningStrategy) {
+            winningStrategies.addAll(gameWinningStrategy);
             return this;
         }
 
@@ -102,6 +111,7 @@ public class Game {
         public Game build() {
             Game game = new Game();
             game.board = new Board(dimension);
+
             game.winningStrategies.addAll(this.winningStrategies);
             game.player.addAll(this.player);
             return game;

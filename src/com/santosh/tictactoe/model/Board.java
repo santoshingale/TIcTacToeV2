@@ -28,4 +28,17 @@ public class Board {
     public int getDimension() {
         return this.dimension;
     }
+
+    public void printBoard() {
+        for (List<Cell> row: board) {
+            for (Cell cell: row) {
+                if (cell.getSymbol() == null) {
+                    System.out.print("|   |");
+                } else {
+                    System.out.printf("| " + cell.getSymbol().getCharacter() + " |");
+                }
+            }
+            System.out.print("\n");
+        }
+    }
 }
