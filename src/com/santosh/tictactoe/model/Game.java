@@ -38,7 +38,7 @@ public class Game {
     }
 
     public static Builder create(){
-        return new Builder;
+        return new Builder();
     }
 
     private static class Builder {
