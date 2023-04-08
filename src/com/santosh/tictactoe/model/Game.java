@@ -1,5 +1,8 @@
 package com.santosh.tictactoe.model;
 
+import com.santosh.tictactoe.model.strategy.GameWinningStrategy;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -10,4 +13,70 @@ public class Game {
     private GameStatus gameStatus;
     private Player winner;
 
+    public List<Player> getPlayer() {
+        return player;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public List<GameWinningStrategy> getWinningStrategies() {
+        return winningStrategies;
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public static Builder create(){
+        return new Builder;
+    }
+
+    private static class Builder {
+        private List<Player> player;
+        private int dimension;
+        private List<GameWinningStrategy> winningStrategies;
+
+        public Builder() {
+            player = new ArrayList<>();
+            winningStrategies = new ArrayList<>();
+        }
+
+        public Builder addPlayer(Player player){
+            this.player.add(player);
+            return this;
+        }
+
+        public Builder addPlayers(List<Player> players){
+            this.player.addAll(player);
+            return this;
+        }
+
+        public Builder addWinningStrategy(GameWinningStrategy gameWinningStrategy){
+            winningStrategies.add(gameWinningStrategy);
+            return this;
+        }
+
+        public Builder addDimension(int dimension){
+            this.dimension = dimension;
+            return this;
+        }
+
+        public Game build(){
+            Game game = new Game();
+            game.board = new Board(dimension);
+            game.winningStrategies.addAll(this.winningStrategies);
+            game.player.addAll(this.player);
+            return game;
+        }
+    }
 }
